@@ -1,0 +1,8 @@
+Vous pouvez ajouter ici vos images de produits.
+Exemples de noms attendus :
+pc-gamer.jpg
+clavier.jpg
+souris.jpg
+ecran.jpg
+casque.jpg
+webcam.jpg
