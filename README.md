@@ -1,17 +1,16 @@
 # New-Tech — Boutique en ligne
 
-Site e-commerce développé en PHP simulant une boutique de matériel informatique et gaming. Les visiteurs créent un compte, parcourent le catalogue, ajoutent des produits au panier et valident une commande avec choix de la livraison et du mode de paiement.
+Site e-commerce développé en PHP proposant du matériel informatique et gaming. Les utilisateurs peuvent créer un compte, parcourir le catalogue, gérer leur panier et passer commande.
 
-Projet réalisé dans le cadre de ma première année de Bachelor Informatique et Systèmes Digitaux à l'EPSI.
-
+Une interface d’administration permet également de gérer la boutique.
 ## Fonctionnalités
 
-- Inscription et connexion des utilisateurs (comptes sécurisés)
+- Inscription et connexion des utilisateurs
 - Catalogue de produits avec description, prix et stock
-- Panier d'achat : ajout, modification des quantités et suppression
-- Validation de commande avec informations de livraison
-- Choix du mode de paiement et page de confirmation
-- Commandes enregistrées en base de données
+- Gestion du panier et validation des commandes
+- Choix de la livraison et du mode de paiement
+- Espace administrateur sécurisé
+- Gestion des produits et suivi des commandes
 
 ## Technologies utilisées
 
@@ -22,26 +21,25 @@ Projet réalisé dans le cadre de ma première année de Bachelor Informatique e
 
 ## Structure du projet
 
-**Authentification**
-- `register.php` — création de compte
+**Espace client**
+- `register.php` — inscription
 - `login.php` / `logout.php` — connexion et déconnexion
-- `auth_check.php` — protection des pages réservées aux membres
+- `index.php` — catalogue de produits
+- `ajouter.php` / `panier.php` / `maj_panier.php` — gestion du panier
+- `paiement.php` / `confirmation.php` — commande et confirmation
 
-**Boutique**
-- `index.php` — catalogue des produits
-- `ajouter.php` — ajout d'un produit au panier
-- `panier.php` — affichage du panier
-- `maj_panier.php` — mise à jour des quantités
+**Administration**
+- `admin.php` — interface d’administration
+- `admin_login.php` / `admin_logout.php` — connexion et déconnexion administrateur
+- `admin_auth_check.php` — protection des pages administrateur
+- `admin_config.php` — configuration de l’administration
 
-**Commande**
-- `paiement.php` — informations de livraison et de paiement
-- `confirmation.php` — récapitulatif de la commande validée
-
-**Éléments communs**
+**Fichiers communs**
 - `connexion.php` — connexion à la base de données
-- `header.php` / `footer.php` — en-tête et pied de page
-- `style.css` — feuille de style
-- `database.sql` — création de la base et produits de démonstration
+- `header.php` / `footer.php` — éléments communs du site
+- `style.css` — mise en page
+- `database.sql` — structure et données de la base
+
 
 ## Installation
 
@@ -68,7 +66,8 @@ La base `boutique_php` contient quatre tables :
 
 - Mots de passe chiffrés avant enregistrement (`password_hash`)
 - Requêtes préparées (PDO) pour se protéger des injections SQL
+- Accès administrateur protégé
 
 ## Auteur
 
-Réalisé par Mana, étudiant en Bachelor Informatique et Systèmes Digitaux à l'EPSI.
+Projet réalisé dans le cadre de ma première année de Bachelor Informatique et Systèmes Digitaux à l’EPSI.
