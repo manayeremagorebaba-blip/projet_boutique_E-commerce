@@ -7,18 +7,19 @@ $produits = $requete->fetchAll();
 
 require_once "header.php";
 ?>
+<?php $estAdmin = (($_SESSION["role"] ?? null) === "admin" && ($_SESSION["is_admin"] ?? false) === true); ?>
 <section class="hero">
     <div>
-        <p class="badge">Boutique dynamique en PHP</p>
-        <h1>Bienvenue, <?= htmlspecialchars($_SESSION["user_nom"]) ?>.</h1>
-        <p>Decouvrez une selection de produits high-tech avec un panier, une connexion et une commande en base de donnees.</p>
+        <h1><?= $estAdmin ? 'Bienvenue, administrateur.' : 'Bienvenue, ' . htmlspecialchars($_SESSION["user_nom"] ?? 'client', ENT_QUOTES, 'UTF-8') . '.' ?></h1>
         <a class="btn-secondaire" href="#produits">Voir les produits</a>
+        <?php if ($estAdmin): ?>
+            <a class="btn-secondaire admin-shop-add" href="admin.php">Ajouter un produit</a>
+        <?php endif; ?>
     </div>
 </section>
 
 <section id="produits" class="section-title">
     <h2>Nos produits</h2>
-    <p>Produits recuperes automatiquement depuis la base MySQL.</p>
 </section>
 
 <div class="grille-produits">
@@ -38,10 +39,16 @@ require_once "header.php";
                     <span>Stock : <?= $produit["stock"] ?></span>
                 </div>
 
-                <form action="ajouter.php" method="POST">
-                    <input type="hidden" name="id_produit" value="<?= $produit["id_produit"] ?>">
-                    <button type="submit" <?= $produit["stock"] <= 0 ? "disabled" : "" ?>>Ajouter au panier</button>
-                </form>
+                <?php if ($estAdmin): ?>
+                    <div class="admin-shop-actions">
+                        <a class="btn-secondaire" href="admin.php?edit=<?= (int)$produit["id_produit"] ?>">Modifier ce produit</a>
+                    </div>
+                <?php else: ?>
+                    <form action="ajouter.php" method="POST">
+                        <input type="hidden" name="id_produit" value="<?= $produit["id_produit"] ?>">
+                        <button type="submit" <?= $produit["stock"] <= 0 ? "disabled" : "" ?>>Ajouter au panier</button>
+                    </form>
+                <?php endif; ?>
             </div>
         </article>
     <?php endforeach; ?>

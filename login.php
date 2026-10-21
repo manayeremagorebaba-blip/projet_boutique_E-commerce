@@ -2,7 +2,7 @@
 session_start();
 require_once "connexion.php";
 
-if (isset($_SESSION["user_id"])) {
+if (($_SESSION["role"] ?? null) === "client" && isset($_SESSION["user_id"])) {
     header("Location: index.php");
     exit;
 }
@@ -18,6 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $utilisateur = $requete->fetch();
 
     if ($utilisateur && password_verify($motdepasse, $utilisateur["mot_de_passe"])) {
+        // Une connexion client ne doit jamais conserver des droits administrateur.
+        unset($_SESSION['is_admin'], $_SESSION['admin_email'], $_SESSION['admin_csrf']);
+        session_regenerate_id(true);
+        $_SESSION["role"] = "client";
         $_SESSION["user_id"] = $utilisateur["id_utilisateur"];
         $_SESSION["user_nom"] = $utilisateur["nom"];
         header("Location: index.php");

@@ -58,7 +58,7 @@ require_once "header.php";
 ?>
 <section class="section-title">
     <h1>Paiement</h1>
-    <p>Cette page simule un paiement et enregistre la commande.</p>
+    
 </section>
 
 <div class="paiement-layout">

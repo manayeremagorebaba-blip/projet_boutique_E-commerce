@@ -1,6 +1,6 @@
 </main>
 <footer class="footer">
-    <p>&copy; 2026 New-Tech - Projet PHP et MySQL.</p>
+    <p>&copy; New-Tech</p>
 </footer>
 </body>
 </html>

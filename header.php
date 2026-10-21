@@ -21,11 +21,15 @@ if (isset($_SESSION["panier"])) {
 <header class="topbar">
     <a class="logo" href="index.php">New<span>-Tech</span></a>
     <nav>
-        <?php if (isset($_SESSION["user_id"])): ?>
+        <?php if (($_SESSION["role"] ?? null) === "admin" && ($_SESSION["is_admin"] ?? false) === true): ?>
+            <a href="index.php">Boutique</a>
+            <a href="admin_logout.php">Déconnexion</a>
+        <?php elseif (($_SESSION["role"] ?? null) === "client" && isset($_SESSION["user_id"])): ?>
             <a href="index.php">Boutique</a>
             <a href="panier.php">Panier (<?= $nombrePanier ?>)</a>
-            <a href="logout.php">Deconnexion</a>
+            <a href="logout.php">Déconnexion</a>
         <?php else: ?>
+            <a href="index.php">Boutique</a>
             <a href="login.php">Connexion</a>
             <a href="register.php">Inscription</a>
         <?php endif; ?>
